@@ -4,10 +4,31 @@ export interface IApartment {
   building: string;
   floor: number;
 }
-export interface IClient {
-  name: string;
+
+export interface IUser {
+  _id: string;
+  login: string;
+  password: string;
+  date?: string;
   fullName?: string;
-  phone: string;
+  phone?: string;
   additionalPhone?: string;
-  city?: string;
+}
+
+export interface IClient {
+  date?: string;
+  firstName: string;
+  lastName: string;
+  phone1: string;
+  phone2?: string;
+  registerCity?: string;
+  img?:string;
+}
+
+export interface IBooking {
+  apartmentId: string;
+  startDateTime:string;
+  endDateTime: string;
+  clientId: string;
+  numberOfGuests: number;
 }
