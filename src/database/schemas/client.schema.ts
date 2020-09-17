@@ -7,5 +7,6 @@ export const ClientSchema = new mongoose.Schema({
   phone1:{type:String, required: true},
   phone2: String,
   registerCity: {type: String, required: true},
-  img: String
+  img: String,
+  comment: String
 });

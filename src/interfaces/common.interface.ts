@@ -1,8 +1,13 @@
 export interface IApartment {
-  id?: number;
+  _id?: number;
   street: string;
   building: string;
+  flat: string;
   floor: number;
+  generalArea: number;
+  lifeArea: number;
+  kitchenArea:number;
+  rooms: number;
 }
 
 export interface IUser {
@@ -23,6 +28,7 @@ export interface IClient {
   phone2?: string;
   registerCity?: string;
   img?:string;
+  comment?:string;
 }
 
 export interface IBooking {
