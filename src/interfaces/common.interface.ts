@@ -21,20 +21,28 @@ export interface IUser {
 }
 
 export interface IClient {
+  clientId?: string;
   date?: string;
   firstName: string;
   lastName: string;
   phone1: string;
   phone2?: string;
   registerCity?: string;
+  registerDate?: string;
   img?:string;
   comment?:string;
 }
 
+export interface ISavedClient extends IClient {
+  _id: string;
+}
+
 export interface IBooking {
   apartmentId: string;
-  startDateTime:string;
-  endDateTime: string;
-  clientId: string;
+  client: IClient;
+  startDate:string;
+  endDate: string;
+  startTime: string;
+  endTime: string;
   numberOfGuests: number;
 }
