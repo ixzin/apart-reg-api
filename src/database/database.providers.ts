@@ -4,6 +4,8 @@ export const databaseProviders = [
   {
     provide: 'DATABASE_CONNECTION',
     useFactory: (): Promise<typeof mongoose> =>
-      mongoose.connect('mongodb://localhost/apartdb'),
+      mongoose.connect('mongodb://localhost/apartdb',{
+        useCreateIndex: true
+      }),
   },
 ];

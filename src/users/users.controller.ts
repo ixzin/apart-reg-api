@@ -4,6 +4,7 @@ import { UsersService } from './users.service';
 import { UserDto } from '../dto/user.dto';
 import { IUser } from '../interfaces/common.interface';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { Crypto } from '../crypto';
 
 @Controller('users')
 export class UsersController {
@@ -17,12 +18,14 @@ export class UsersController {
   async findAll(): Promise<IUser[]> {
     return this.usersService.findAll();
   }
-
+  
   @UseGuards(JwtAuthGuard)
   @Post()
   async create(@Body() createUser: UserDto) {
     try {
-      return this.usersService.create(createUser);
+      const user = {...createUser, password: Crypto.encrypt(createUser.password)};
+      console.log(user);
+      return this.usersService.create(user);
     } catch (error) {
       return error;
     }
