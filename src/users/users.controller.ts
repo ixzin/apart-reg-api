@@ -18,13 +18,12 @@ export class UsersController {
   async findAll(): Promise<IUser[]> {
     return this.usersService.findAll();
   }
-  
+
   @UseGuards(JwtAuthGuard)
   @Post()
   async create(@Body() createUser: UserDto) {
     try {
       const user = {...createUser, password: Crypto.encrypt(createUser.password)};
-      console.log(user);
       return this.usersService.create(user);
     } catch (error) {
       return error;
