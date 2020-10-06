@@ -23,17 +23,16 @@ export class AuthService {
     const user = await this.usersService.findOne(loginInfo.login);
 
     await this.stopUserSession(loginInfo.login);
-
     if (user && Crypto.decrypt(user.password) === loginInfo.password) {
       const payload = {username: user.login, sub: user._id};
-      const refreshToken = jwt.sign(payload, jwtConstants.secret_refresh, {expiresIn: '14d'});
+      const refreshToken = jwt.sign(payload, jwtConstants.secret_refresh, {expiresIn: jwtConstants.expired_refresh});
 
       await this.startNewUserSession(user._id, refreshToken);
 
       return {
         access_token: this.jwtService.sign(payload),
         refresh_token: refreshToken,
-        expires_on: Date.now()
+        expires_on: Date.now() + parseInt(jwtConstants.expired) * 1000
       }
     } else {
       return new UnauthorizedException();
@@ -53,7 +52,7 @@ export class AuthService {
         return {
           access_token: this.jwtService.sign(payload),
           refresh_token: newRefreshToken,
-          expires_on: Date.now()
+          expires_on: Date.now() + parseInt(jwtConstants.expired) * 1000
         }
       } else {
         return new UnauthorizedException();
@@ -77,7 +76,7 @@ export class AuthService {
   async stopUserSession(login: string) {
     const user = await this.usersService.findOne(login);
 
-    this.sessionModel.findOneAndRemove({userId: user._id, active: true},function(err, doc) {
+    this.sessionModel.findOneAndRemove({userId: user._id, active: true}, function (err, doc) {
       if (err) return new Error(err);
     });
   }

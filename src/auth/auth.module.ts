@@ -27,7 +27,7 @@ import { SessionsProviders } from './sessions.provider';
     ),
     JwtModule.register({
       secret: jwtConstants.secret,
-      signOptions: {expiresIn: '3600s'},
+      signOptions: {expiresIn: jwtConstants.expired},
     }),
   ],
   controllers: [AuthController],
