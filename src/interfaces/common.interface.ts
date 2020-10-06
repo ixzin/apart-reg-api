@@ -1,3 +1,9 @@
+export interface IAuth {
+  access_token: string;
+  refresh_token: string;
+  expires_on: number;
+}
+
 export interface IApartment {
   _id?: number;
   street: string;
@@ -6,7 +12,7 @@ export interface IApartment {
   floor: number;
   generalArea: number;
   lifeArea: number;
-  kitchenArea:number;
+  kitchenArea: number;
   rooms: number;
 }
 
@@ -29,8 +35,8 @@ export interface IClient {
   phone2?: string;
   registerCity?: string;
   registerDate?: string;
-  img?:string;
-  comment?:string;
+  img?: string;
+  comment?: string;
 }
 
 export interface ISavedClient extends IClient {
@@ -40,7 +46,7 @@ export interface ISavedClient extends IClient {
 export interface IBooking {
   apartmentId: string;
   client: IClient;
-  startDate:string;
+  startDate: string;
   endDate: string;
   startTime: string;
   endTime: string;
