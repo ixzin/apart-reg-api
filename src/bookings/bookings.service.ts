@@ -51,20 +51,15 @@ export class BookingsService {
         let date = new Date(startDate.valueOf());
 
         while (date.getTime() <= endDate.getTime()) {
-          addBookingDate(booking, date);
+          bookingMap.push({
+            date: date.toString(),
+            bookingId: booking._id,
+            isStart: isDatesEquals(booking.startDate, date),
+            isEnd: isDatesEquals(booking.endDate, date)
+          });
           date.setUTCDate(date.getDate() + 1);
         }
-        addBookingDate(booking, date);
       });
-
-      function addBookingDate(booking: IBooking, date) {
-        bookingMap.push({
-          date: date.toString(),
-          bookingId: booking._id,
-          isStart: isDatesEquals(booking.startDate, date),
-          isEnd: isDatesEquals(booking.endDate, date)
-        });
-      };
 
       function isDatesEquals(date1, date2): boolean {
         const firstDate = new Date(date1);
