@@ -35,6 +35,7 @@ export class BookingsService {
       }).exec();
 
       let bookingMap = [];
+
       bookingData.forEach((booking: IBooking) => {
         let startDate = new Date(booking.startDate);
         let endDate = new Date(booking.endDate);
@@ -47,17 +48,30 @@ export class BookingsService {
           endDate = end;
         }
 
-        let date = startDate;
+        let date = new Date(startDate.valueOf());
 
         while (date.getTime() <= endDate.getTime()) {
-          bookingMap.push({
-            date: date.toString(),
-            bookingId: booking._id
-          });
-          date.setDate(date.getDate() + 1);
+          addBookingDate(booking, date);
+          date.setUTCDate(date.getDate() + 1);
         }
-
+        addBookingDate(booking, date);
       });
+
+      function addBookingDate(booking: IBooking, date) {
+        bookingMap.push({
+          date: date.toString(),
+          bookingId: booking._id,
+          isStart: isDatesEquals(booking.startDate, date),
+          isEnd: isDatesEquals(booking.endDate, date)
+        });
+      };
+
+      function isDatesEquals(date1, date2): boolean {
+        const firstDate = new Date(date1);
+        const secondDate = new Date(date2);
+
+        return firstDate.getTime() === secondDate.getTime();
+      }
 
       return bookingMap.sort((a, b) => {
         let date1 = new Date(a.date);
