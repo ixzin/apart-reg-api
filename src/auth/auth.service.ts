@@ -76,7 +76,7 @@ export class AuthService {
   async stopUserSession(login: string) {
     const user = await this.usersService.findOne(login);
 
-    this.sessionModel.findOneAndRemove({userId: user._id, active: true}, function (err, doc) {
+    await this.sessionModel.findOneAndRemove({userId: user._id, active: true}, function (err, doc) {
       if (err) return new Error(err);
     });
   }
