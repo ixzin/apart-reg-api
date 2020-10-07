@@ -44,11 +44,19 @@ export interface ISavedClient extends IClient {
 }
 
 export interface IBooking {
+  _id?: string;
   apartmentId: string;
   client: IClient;
+  clientId?: string;
   startDate: string;
   endDate: string;
   startTime: string;
   endTime: string;
   numberOfGuests: number;
+}
+
+export interface IBookingQuery {
+  apartmentId: string;
+  startDate: string;
+  endDate: string;
 }

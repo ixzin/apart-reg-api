@@ -1,7 +1,7 @@
-import { Get, Post, Controller, Put, Delete, Body, UseGuards } from '@nestjs/common';
+import { Get, Post, Controller, Put, Delete, Body, UseGuards, Query } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { BookingsService } from './bookings.service';
-import { IBooking, ISavedClient } from '../interfaces/common.interface';
+import { IBooking, IBookingQuery, ISavedClient } from '../interfaces/common.interface';
 import { BookingDto } from '../dto/booking.dto';
 import { ClientsService } from '../clients/clients.service';
 
@@ -18,14 +18,19 @@ export class BookingsControllers {
     return this.bookingsService.findAll();
   }
 
+  @Get('period')
+  async findByPeriod(@Query() params: IBookingQuery) {
+    return this.bookingsService.findByPeriod(params);
+  }
+
   @UseGuards(JwtAuthGuard)
   @Post()
   async create(@Body() createBooking: BookingDto) {
     if (createBooking.client.clientId) {
       try {
         const clientId = createBooking.client.clientId;
+
         let booking = {...createBooking, clientId};
-        console.log(booking);
         return this.bookingsService.create(booking);
       }
       catch (error) {
