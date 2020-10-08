@@ -1,4 +1,4 @@
-import { Get, Post, Controller, Put, Delete, Body, UseGuards, Query } from '@nestjs/common';
+import { Get, Post, Controller, Put, Delete, Body, UseGuards, Query, Param } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { BookingsService } from './bookings.service';
 import { IBooking, IBookingQuery, ISavedClient } from '../interfaces/common.interface';
@@ -21,6 +21,12 @@ export class BookingsControllers {
   @Get('period')
   async findByPeriod(@Query() params: IBookingQuery) {
     return this.bookingsService.findByPeriod(params);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get(':id')
+  findOne(@Param() params) {
+    return this.bookingsService.findOne(params.id);
   }
 
   @UseGuards(JwtAuthGuard)

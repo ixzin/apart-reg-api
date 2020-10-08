@@ -121,4 +121,8 @@ export class BookingsService {
       throw new Error('start Date more then end');
     }
   }
+
+  async findOne(id: string): Promise<IBooking> {
+    return this.bookingModel.findById(id).exec();
+  }
 }
