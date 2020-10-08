@@ -53,6 +53,7 @@ export interface IBooking {
   startTime: string;
   endTime: string;
   numberOfGuests: number;
+  color?: string;
 }
 
 export interface IBookingQuery {

@@ -8,5 +8,6 @@ export const BookingSchema = new mongoose.Schema({
   endDate: {type: String, required: true},
   startTime: {type: String, required: true},
   endTime: {type:String, required: true},
-  numberOfGuests: {type:Number, required: true}
+  numberOfGuests: {type:Number, required: true},
+  color: {type:String, required: true}
 });
