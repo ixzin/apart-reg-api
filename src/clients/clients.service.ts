@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { ClientDto } from '../dto/client.dto';
-import { IClient } from '../interfaces/common.interface';
+import { IBooking, IClient } from '../interfaces/common.interface';
 
 @Injectable()
 export class ClientsService {
@@ -17,5 +17,9 @@ export class ClientsService {
 
   async findAll(): Promise<IClient[]> {
     return this.clientModel.find().exec();
+  }
+
+  async findOne(id: string): Promise<IClient> {
+    return this.clientModel.findById(id).exec();
   }
 }

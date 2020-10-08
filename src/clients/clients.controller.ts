@@ -1,4 +1,4 @@
-import { Get, Post, Controller, Put, Delete, Body, UseGuards } from '@nestjs/common';
+import { Get, Post, Controller, Put, Delete, Body, UseGuards, Param } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { ClientsService } from './clients.service';
 import { IClient } from '../interfaces/common.interface';
@@ -15,6 +15,12 @@ export class ClientsController {
   @Get()
   async findAll(): Promise<IClient[]> {
     return this.clientsService.findAll();
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get(':id')
+  findOne(@Param() params) {
+    return this.clientsService.findOne(params.id);
   }
 
   @UseGuards(JwtAuthGuard)
