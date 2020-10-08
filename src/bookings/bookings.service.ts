@@ -37,8 +37,10 @@ export class BookingsService {
       let bookingMap = [];
 
       bookingData.forEach((booking: IBooking) => {
+        const randomColor = getRandColor(3);
         let startDate = new Date(booking.startDate);
         let endDate = new Date(booking.endDate);
+
 
         if (startDate.getTime() < start.getTime()) {
           startDate = start;
@@ -54,6 +56,7 @@ export class BookingsService {
           bookingMap.push({
             date: date.toString(),
             bookingId: booking._id,
+            color: randomColor,
             isStart: isDatesEquals(booking.startDate, date),
             isEnd: isDatesEquals(booking.endDate, date)
           });
@@ -66,6 +69,15 @@ export class BookingsService {
         const secondDate = new Date(date2);
 
         return firstDate.getTime() === secondDate.getTime();
+      }
+
+      function getRandColor(brightness){
+        // Six levels of brightness from 0 to 5, 0 being the darkest
+        const rgb = [Math.random() * 256, Math.random() * 256, Math.random() * 256];
+        const mix = [brightness*51, brightness*51, brightness*51]; //51 => 255/5
+        const mixedrgb = [rgb[0] + mix[0], rgb[1] + mix[1], rgb[2] + mix[2]].map(function(x){ return Math.round(x/2.0)})
+
+        return "rgb(" + mixedrgb.join(",") + ")";
       }
 
       return bookingMap.sort((a, b) => {
