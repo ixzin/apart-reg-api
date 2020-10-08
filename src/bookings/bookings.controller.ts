@@ -17,7 +17,8 @@ export class BookingsControllers {
   async findAll(): Promise<IBooking[]> {
     return this.bookingsService.findAll();
   }
-
+  
+  @UseGuards(JwtAuthGuard)
   @Get('period')
   async findByPeriod(@Query() params: IBookingQuery) {
     return this.bookingsService.findByPeriod(params);
