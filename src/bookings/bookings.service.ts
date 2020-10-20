@@ -101,7 +101,7 @@ export class BookingsService {
             isStart: isDatesEquals(booking.startDate, date),
             isEnd: isDatesEquals(booking.endDate, date)
           });
-          date.setDate(date.getDate() + 1);
+          date.setUTCDate(date.getDate() + 1);
         }
       });
 
