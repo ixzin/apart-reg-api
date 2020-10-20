@@ -91,7 +91,7 @@ export class BookingsService {
         }
 
         let date = new Date(startDate.valueOf());
-
+        console.log(date, endDate);
         while (date.getTime() <= endDate.getTime()) {
           bookingMap.push({
             date: date.toString(),
