@@ -74,7 +74,7 @@ export class BookingsService {
           }
         }]
       }).exec();
-      console.log(bookingData);
+
       let bookingMap = [];
 
       bookingData.forEach((booking: IBooking) => {
@@ -93,7 +93,6 @@ export class BookingsService {
         let date = new Date(startDate.valueOf());
 
         while (date.getTime() <= endDate.getTime()) {
-          console.log(date.getTime(), endDate.getTime());
           bookingMap.push({
             date: date.toString(),
             bookingId: booking._id,
@@ -101,8 +100,7 @@ export class BookingsService {
             isStart: isDatesEquals(booking.startDate, date),
             isEnd: isDatesEquals(booking.endDate, date)
           });
-          date.setUTCDate(date.getDate() + 1);
-          console.log(date.getTime(), endDate.getTime());
+          date.setUTCDate(date.getUTCDate() + 1);
         }
       });
 
