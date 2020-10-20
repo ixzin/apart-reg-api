@@ -74,7 +74,7 @@ export class BookingsService {
           }
         }]
       }).exec();
-
+      console.log(bookingData);
       let bookingMap = [];
 
       bookingData.forEach((booking: IBooking) => {
