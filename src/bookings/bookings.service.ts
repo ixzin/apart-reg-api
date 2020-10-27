@@ -90,12 +90,10 @@ export class BookingsService {
           endDate = end;
         }
 
-        startDate.setHours(0,0,0);
-        endDate.setHours(23,59,59);
-
         let date = new Date(startDate.valueOf());
 
         while (date.getTime() <= endDate.getTime()) {
+          console.log(new Date(date),new Date(endDate));
           bookingMap.push({
             date: date.toString(),
             bookingId: booking._id,
@@ -103,7 +101,7 @@ export class BookingsService {
             isStart: isDatesEquals(booking.startDate, date),
             isEnd: isDatesEquals(booking.endDate, date)
           });
-          date.setDate(date.getDate() + 1);
+          date.setUTCDate(date.getUTCDate() + 1);
         }
       });
 
