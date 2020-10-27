@@ -76,7 +76,7 @@ export class BookingsService {
       }).exec();
 
       let bookingMap = [];
-      console.log(params.endDate, new Date(params.endDate));
+
       bookingData.forEach((booking: IBooking) => {
         let startDate = new Date(booking.startDate);
         let endDate = new Date(booking.endDate);
@@ -93,7 +93,6 @@ export class BookingsService {
         let date = new Date(startDate.valueOf());
 
         while (date.getTime() <= endDate.getTime()) {
-
           bookingMap.push({
             date: date.toString(),
             bookingId: booking._id,
