@@ -90,6 +90,9 @@ export class BookingsService {
           endDate = end;
         }
 
+        startDate.setHours(0,0,0,0);
+        endDate.setHours(23,59,59,59);
+
         let date = new Date(startDate.valueOf());
 
         while (date.getTime() <= endDate.getTime()) {
