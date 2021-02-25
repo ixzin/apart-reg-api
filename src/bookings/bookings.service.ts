@@ -67,12 +67,12 @@ export class BookingsService {
     if (start.getTime() <= end.getTime()) {
       const bookingData = await this.bookingModel.find({
         apartmentId: params.apartmentId,
-        $or: [{startDate: {'$gte': params.startDate, '$lt': params.endDate}}, {
-          endDate: {
-            '$gte': params.startDate,
-            '$lt': params.endDate
-          }
-        }]
+        // $or: [{startDate: {'$gte': params.startDate, '$lt': params.endDate}}, {
+        //   endDate: {
+        //     '$gte': params.startDate,
+        //     '$lt': params.endDate
+        //   }
+        // }]
       }).exec();
 
       let bookingMap = [];
