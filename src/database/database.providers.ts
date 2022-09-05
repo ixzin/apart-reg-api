@@ -7,7 +7,7 @@ export const databaseProviders = [
       mongoose.connect('mongodb://localhost/apartdb',{
         useCreateIndex: true,
         user:"admin",
-        pass:"7k1f5d4t"
+        pass:""
       }),
   },
 ];
